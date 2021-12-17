@@ -97,9 +97,9 @@ public class BonsaiController {
 //        this.bonsaiService.deleteById(uuid);
         try {
             return ResponseEntity.ok(bonsaiService.patchBonsai(bons, uuid));
-        }catch (NullPointerException e ){
+        } catch (NullPointerException e) {
             return ResponseEntity.notFound().build();
-        }catch (Exception e ){
+        } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
 

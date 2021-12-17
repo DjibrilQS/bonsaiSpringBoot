@@ -11,19 +11,21 @@ public class Bonsai {
     private String acquisition_date;
     private int acquisition_age;
     private Date last_watering;
+    //Envisager les localDate
 
     public Bonsai(UUID id, String name, String species, String status, String acquisition_date, int acquisition_age, Date last_watering) {
-        this.id=id;
+        this.id = id;
         this.name = name;
         this.species = species;
         this.status = status;
         this.acquisition_date = acquisition_date;
         this.acquisition_age = acquisition_age;
         this.last_watering = last_watering;
+    }
 
+    public Bonsai() {
     }
-    public Bonsai(){
-    }
+
     public String getSpecies() {
         return species;
     }

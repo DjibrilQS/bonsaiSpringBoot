@@ -1,4 +1,4 @@
-package fr.iut.csid.bonsai.infrastructure;
+package fr.iut.csid.Common;
 
 import org.hibernate.annotations.GenericGenerator;
 

@@ -1,9 +1,8 @@
 package fr.iut.csid.bonsai.exposition;
 
 import fr.iut.csid.bonsai.domain.model.Bonsai;
-import fr.iut.csid.bonsai.infrastructure.BonsaiEntity;
+import fr.iut.csid.Common.BonsaiEntity;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class BonsaiMapper {

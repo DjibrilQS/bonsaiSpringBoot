@@ -1,5 +1,7 @@
 package fr.iut.csid.bonsai.infrastructure;
 
+import fr.iut.csid.Common.WateringDao;
+import fr.iut.csid.Common.WateringEntity;
 import fr.iut.csid.bonsai.domain.model.Watering;
 import fr.iut.csid.bonsai.exposition.WateringMapper;
 import org.springframework.stereotype.Component;
@@ -28,7 +30,7 @@ public class WateringRepository {
         return wateringList;
     }
 
-    public Watering save(Watering watering){
+    public Watering save(Watering watering) {
         WateringEntity wateringRes = wateringDao.save(WateringMapper.mapEntityFromWatering(watering));
         return WateringMapper.mapFromEntity(wateringRes);
     }

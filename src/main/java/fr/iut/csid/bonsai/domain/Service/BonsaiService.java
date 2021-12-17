@@ -5,11 +5,10 @@ import fr.iut.csid.bonsai.domain.model.Watering;
 import fr.iut.csid.bonsai.exposition.BonsaiDTO;
 import fr.iut.csid.bonsai.exposition.WateringDTO;
 import fr.iut.csid.bonsai.exposition.WateringMapper;
-import fr.iut.csid.bonsai.infrastructure.BonsaiEntity;
+import fr.iut.csid.Common.BonsaiEntity;
 import fr.iut.csid.bonsai.infrastructure.BonsaiRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 

@@ -1,5 +1,8 @@
 package fr.iut.csid.bonsai.infrastructure;
 
+import fr.iut.csid.Common.BonsaiEntity;
+import fr.iut.csid.Common.WateringDao;
+import fr.iut.csid.Common.WateringEntity;
 import fr.iut.csid.bonsai.domain.model.Bonsai;
 import fr.iut.csid.bonsai.domain.model.Watering;
 import fr.iut.csid.bonsai.exposition.BonsaiDTO;
@@ -20,17 +23,18 @@ public class BonsaiRepository {
 
     private BonsaiDao bonsaiDao;
     private WateringDao wateringDao;
-    public BonsaiRepository(BonsaiDao bdao, WateringDao wdao){
-     this.bonsaiDao = bdao;
-     this.wateringDao = wdao;
+
+    public BonsaiRepository(BonsaiDao bdao, WateringDao wdao) {
+        this.bonsaiDao = bdao;
+        this.wateringDao = wdao;
     }
 
-    public Bonsai getBonsaiByID(UUID id){
+    public Bonsai getBonsaiByID(UUID id) {
         BonsaiEntity bonsai;
         Optional<BonsaiEntity> obe = this.bonsaiDao.findById(id);
-        if(obe.isPresent()) {
+        if (obe.isPresent()) {
             bonsai = this.bonsaiDao.findById(id).get();
-            if(!bonsai.getListeWaterings().isEmpty())
+            if (!bonsai.getListeWaterings().isEmpty())
                 return new Bonsai(id, bonsai.getName(), bonsai.getSpecies(), bonsai.getStatus(), bonsai.getAcquisition_date(), bonsai.getAcquisition_age(), bonsai.getListeWaterings().get(0).getDate());
             return new Bonsai(id, bonsai.getName(), bonsai.getSpecies(), bonsai.getStatus(), bonsai.getAcquisition_date(), bonsai.getAcquisition_age(), null);
         }
@@ -49,9 +53,9 @@ public class BonsaiRepository {
     }
 
     public List<BonsaiDTO> getAllBonsai() {
-        List<BonsaiEntity> bonsaiList =  this.bonsaiDao.findAll();
+        List<BonsaiEntity> bonsaiList = this.bonsaiDao.findAll();
         List<BonsaiDTO> list = new ArrayList<>();
-        for (BonsaiEntity bonsai:bonsaiList) {
+        for (BonsaiEntity bonsai : bonsaiList) {
             BonsaiDTO bons = entityToDto(bonsai);
             list.add(bons);
         }
@@ -72,7 +76,7 @@ public class BonsaiRepository {
         return wateringList;
     }
 
-    public Watering save(Watering watering){
+    public Watering save(Watering watering) {
         WateringEntity wateringRes = wateringDao.save(WateringMapper.mapEntityFromWatering(watering));
         return WateringMapper.mapFromEntity(wateringRes);
     }
