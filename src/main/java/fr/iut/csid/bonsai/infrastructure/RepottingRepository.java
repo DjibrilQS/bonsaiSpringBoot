@@ -1,18 +1,19 @@
 package fr.iut.csid.bonsai.infrastructure;
 
+
+
 import fr.iut.csid.Common.RepottingDao;
 import fr.iut.csid.Common.RepottingEntity;
 import fr.iut.csid.bonsai.domain.model.Repotting;
 import fr.iut.csid.bonsai.exposition.RepottingMapper;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@Repository
+@Component
 public class RepottingRepository {
-
     private RepottingDao repottingDao;
 
     public RepottingRepository(RepottingDao repottingDao) {
@@ -22,15 +23,16 @@ public class RepottingRepository {
     public List<Repotting> findAll(UUID id_bonsai) {
         List<RepottingEntity> filterdRepottingEntityList = repottingDao.findAllBy(id_bonsai);
 
-        List<Repotting> wateringList = new ArrayList<>();
+        List<Repotting> repottingList = new ArrayList<>();
 
         for (RepottingEntity repottingEntity : filterdRepottingEntityList)
-            wateringList.add(RepottingMapper.mapFromEntity(repottingEntity));
-        return wateringList;
+            repottingList.add(RepottingMapper.mapFromEntity(repottingEntity));
+
+        return repottingList;
     }
 
-//    public Repotting save(Repotting repotting) {
-//        RepottingEntity repo = repottingDao.save(RepottingMapper.mapEntityFromRepotting(repotting));
-//        return RepottingMapper.mapFromEntity(repo);
-//    }
+    public Repotting save(Repotting repotting){
+        RepottingEntity repottingEntity = repottingDao.save(RepottingMapper.repottingToEntity(repotting));
+        return RepottingMapper.mapFromEntity(repottingEntity);
+    }
 }

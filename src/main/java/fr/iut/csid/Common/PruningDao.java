@@ -8,9 +8,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.UUID;
 
+
 @Repository
-public interface RepottingDao extends JpaRepository<BonsaiEntity, UUID> {
-    @Query("select p from repotting p WHERE p.bonsai.id=:bonsaiId order by p.date DESC")
-    List<RepottingEntity> findAllByBonsaiId(@Param("bonsaiId") UUID bonsaiId);
-    List<RepottingEntity> findAllBy(UUID id_bonsai);
+public interface PruningDao extends JpaRepository<PruningEntity, UUID> {
+    @Query("select p from pruning p WHERE p.bonsai.id=:bonsaiId order by p.date DESC")
+    List<PruningEntity> findAllByBonsaiId(@Param("bonsaiId") UUID bonsaiId);
 }

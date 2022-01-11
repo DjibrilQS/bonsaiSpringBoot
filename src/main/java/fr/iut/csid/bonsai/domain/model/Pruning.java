@@ -1,26 +1,26 @@
+
 package fr.iut.csid.bonsai.domain.model;
 
 import java.util.Date;
 import java.util.UUID;
 
-public class Repotting {
-
-    private UUID id_repotting;
+public class Pruning {
+    private UUID id_pruning;
     private Date date;
     private Bonsai bonsai;
 
-    public Repotting(UUID id_watering, Date date, Bonsai bonsai) {
-        this.id_repotting = id_watering;
+    public Pruning(UUID id_pruning, Date date, Bonsai bonsai) {
+        this.id_pruning = id_pruning;
         this.date = date;
         this.bonsai = bonsai;
     }
 
-    public UUID getId_repotting() {
-        return id_repotting;
+    public UUID getId_pruning() {
+        return id_pruning;
     }
 
-    public void setId_repotting(UUID id_repotting) {
-        this.id_repotting = id_repotting;
+    public void setId_pruning(UUID id_pruning) {
+        this.id_pruning = id_pruning;
     }
 
     public Date getDate() {

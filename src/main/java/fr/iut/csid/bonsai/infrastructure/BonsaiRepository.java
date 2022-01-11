@@ -1,5 +1,6 @@
 package fr.iut.csid.bonsai.infrastructure;
 
+import fr.iut.csid.Common.BonsaiDao;
 import fr.iut.csid.Common.BonsaiEntity;
 import fr.iut.csid.Common.WateringDao;
 import fr.iut.csid.Common.WateringEntity;

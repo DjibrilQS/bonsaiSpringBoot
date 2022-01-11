@@ -2,7 +2,6 @@ package fr.iut.csid.bonsai.exposition;
 
 import fr.iut.csid.bonsai.domain.model.Bonsai;
 import fr.iut.csid.bonsai.domain.model.Watering;
-import fr.iut.csid.bonsai.infrastructure.BonsaiEntityMapper;
 import fr.iut.csid.Common.WateringEntity;
 
 
