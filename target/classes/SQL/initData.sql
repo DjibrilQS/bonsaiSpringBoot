@@ -19,3 +19,6 @@ create table repotting(id_repotting uuid, id_bonsai uuid, date_last_repotting ti
 alter table repotting add constraint PK_repotting PRIMARY KEY(id_repotting);
 alter table repotting add constraint FK_repotting_bonsai FOREIGN KEY(id_bonsai) REFERENCES bonsai(id_bonsai);
 
+create table owner(id_owner uuid, name varchar, id_bonsaiuuid);
+alter table owner add constraint PK_owner primary key(id_owner);
+alter table owner add constraint FK_owner_bonsai foreign key(id_bonsai) references bonsai(id_bonsai)
