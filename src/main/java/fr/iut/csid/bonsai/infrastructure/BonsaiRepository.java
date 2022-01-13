@@ -1,5 +1,6 @@
 package fr.iut.csid.bonsai.infrastructure;
 
+import fr.iut.csid.Common.BonsaiDao;
 import fr.iut.csid.Common.BonsaiEntity;
 import fr.iut.csid.Common.WateringDao;
 import fr.iut.csid.Common.WateringEntity;
@@ -14,8 +15,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static fr.iut.csid.bonsai.exposition.BonsaiMapper.bonsaiToEntity;
 import static fr.iut.csid.bonsai.exposition.BonsaiMapper.entityToDto;
-import static fr.iut.csid.bonsai.infrastructure.BonsaiEntityMapper.bonsaiToEntity;
 
 
 @Component

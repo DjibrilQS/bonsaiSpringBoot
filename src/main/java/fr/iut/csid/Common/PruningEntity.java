@@ -6,13 +6,14 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.UUID;
 
-@Entity(name = "repotting")
-@Table(name = "repotting")
-public class RepottingEntity {
+@Entity(name = "pruning")
+@Table(name = "pruning")
+public class PruningEntity {
+
     @Id
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @GeneratedValue(generator = "uuid2")
-    private UUID id_repotting;
+    private UUID id_pruning;
 
     @Column(name = "datetime")
     private Date date;
@@ -21,15 +22,15 @@ public class RepottingEntity {
     @JoinColumn(name = "id_bonsai")
     private BonsaiEntity bonsai;
 
-    public RepottingEntity() {
+    public PruningEntity() {
     }
 
-    public UUID getId_repotting() {
-        return id_repotting;
+    public UUID getId_pruning() {
+        return id_pruning;
     }
 
-    public void setId_repotting(UUID id_repotting) {
-        this.id_repotting = id_repotting;
+    public void setId_pruning(UUID id_pruning) {
+        this.id_pruning = id_pruning;
     }
 
     public Date getDate() {

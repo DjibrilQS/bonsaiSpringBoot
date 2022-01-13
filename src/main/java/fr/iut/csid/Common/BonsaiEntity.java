@@ -30,9 +30,18 @@ public class BonsaiEntity {
     @Column(name="status")
     private String status;
 
-    @OneToMany(targetEntity = WateringEntity.class, mappedBy ="bonsai", cascade = CascadeType.REMOVE)
-    List<WateringEntity> listeWaterings;
+    @ManyToOne
+    @JoinColumn(name = "id_owner")
+    private OwnerEntity owner;
 
+    @OneToMany(targetEntity = WateringEntity.class, mappedBy="bonsai", cascade = CascadeType.REMOVE)
+    private List<WateringEntity> listeWaterings;
+
+    @OneToMany(targetEntity = PruningEntity.class, mappedBy="bonsai", cascade = CascadeType.REMOVE)
+    private List<PruningEntity> listePrunings;
+
+    @OneToMany(targetEntity = RepottingEntity.class, mappedBy="bonsai", cascade = CascadeType.REMOVE)
+    private List<RepottingEntity> listeRepottings;
 
     public BonsaiEntity() {
 
@@ -86,11 +95,35 @@ public class BonsaiEntity {
         this.status = status;
     }
 
+    public OwnerEntity getOwner() {
+        return owner;
+    }
+
+    public void setOwner(OwnerEntity owner) {
+        this.owner = owner;
+    }
+
     public List<WateringEntity> getListeWaterings() {
         return listeWaterings;
     }
 
     public void setListeWaterings(List<WateringEntity> listeWaterings) {
         this.listeWaterings = listeWaterings;
+    }
+
+    public List<PruningEntity> getListePrunings() {
+        return listePrunings;
+    }
+
+    public void setListePrunings(List<PruningEntity> listePrunings) {
+        this.listePrunings = listePrunings;
+    }
+
+    public List<RepottingEntity> getListeRepottings() {
+        return listeRepottings;
+    }
+
+    public void setListeRepottings(List<RepottingEntity> listeRepottings) {
+        this.listeRepottings = listeRepottings;
     }
 }

@@ -2,7 +2,6 @@ package fr.iut.csid.bonsai.exposition;
 
 import fr.iut.csid.bonsai.domain.model.Bonsai;
 import fr.iut.csid.bonsai.domain.model.Watering;
-import fr.iut.csid.bonsai.infrastructure.BonsaiEntityMapper;
 import fr.iut.csid.Common.WateringEntity;
 
 
@@ -27,7 +26,7 @@ public class WateringMapper {
         WateringEntity wateringEntity = new WateringEntity();
         wateringEntity.setId_watering(watering.getId_watering());
         wateringEntity.setDate(watering.getDate());
-        wateringEntity.setBonsai(BonsaiEntityMapper.bonsaiToEntity(watering.getBonsai()));
+        wateringEntity.setBonsai(BonsaiMapper.bonsaiToEntity(watering.getBonsai()));
         return wateringEntity;
     }
 }
