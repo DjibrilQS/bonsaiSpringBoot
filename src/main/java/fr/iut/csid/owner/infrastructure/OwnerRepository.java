@@ -7,6 +7,7 @@ import fr.iut.csid.Common.BonsaiDao;
 import fr.iut.csid.owner.domain.models.BonsaiOwner;
 import fr.iut.csid.owner.domain.models.Mapper;
 import fr.iut.csid.owner.domain.models.Owner;
+import fr.iut.csid.owner.exposition.OwnerMapper;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,7 +42,7 @@ public class OwnerRepository {
     }
 
     public Owner save(Owner owner){
-        return Mapper.mapOwnerFromEntity(ownerDao.save(EntityMapper.mapFromOwner(owner)));
+        return Mapper.mapOwnerFromEntity(ownerDao.save(OwnerMapper.mapFromOwner(owner)));
     }
 
     public Optional<BonsaiOwner> findBonsaiById(UUID bonsai_id) {
@@ -50,7 +51,7 @@ public class OwnerRepository {
 
     @Transactional
     public Optional<BonsaiOwner> updateOwner(Owner newOwner, UUID bonsaiId) {
-        bonsaiDao.updateOwner(bonsaiId, EntityMapper.mapFromOwner(newOwner));
+        bonsaiDao.updateOwner(bonsaiId, OwnerMapper.mapFromOwner(newOwner));
         return findBonsaiById(bonsaiId);
     }
 }

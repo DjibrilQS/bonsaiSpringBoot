@@ -13,11 +13,11 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/owners")
-public class OwnersController {
+public class OwnerController {
 
     private OwnerService ownerService;
 
-    public OwnersController(OwnerService ownerService) {
+    public OwnerController(OwnerService ownerService) {
         this.ownerService = ownerService;
     }
 
@@ -25,14 +25,14 @@ public class OwnersController {
     public ResponseEntity<List<OwnerDTO>> findAllWithMoreThan(@RequestParam int nbBonsai){
         return ResponseEntity.ok(ownerService.findAllWithMoreThan(nbBonsai)
                 .stream()
-                .map(DTOMapper::mapDTOFromOwner)
+                .map(OwnerMapper::mapDTOFromOwner)
                 .collect(Collectors.toList()));
     }
 
     @GetMapping("/{uuid}")
     public ResponseEntity<OwnerDTO> findById(@PathVariable("uuid") UUID uuid){
         return ownerService.findById(uuid)
-                .map(DTOMapper::mapDTOFromOwner)
+                .map(OwnerMapper::mapDTOFromOwner)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -40,7 +40,7 @@ public class OwnersController {
     @GetMapping("/{uuid}/bonsais")
     public ResponseEntity<List<BonsaiOwnerDTO>> findBonsaisByOwner(@PathVariable("uuid") UUID uuid){
         return ownerService.findById(uuid)
-                .map(DTOMapper::mapDTOFromOwner)
+                .map(OwnerMapper::mapDTOFromOwner)
                 .map(OwnerDTO::getBonsais)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -48,14 +48,22 @@ public class OwnersController {
 
     @PostMapping
     public ResponseEntity<OwnerDTO> createOwner(@RequestBody OwnerDTO owner){
-        OwnerDTO ownerDTO = DTOMapper.mapDTOFromOwner(ownerService.create(Mapper.mapOwnerFromDTO(owner)));
+        OwnerDTO ownerDTO = OwnerMapper.mapDTOFromOwner(ownerService.create(Mapper.mapOwnerFromDTO(owner)));
         return ResponseEntity.created(URI.create("/owners/"+ ownerDTO.getId())).body(ownerDTO);
     }
 
     @PostMapping("/{owner_id}/bonsai")
     public List<BonsaiOwnerDTO> addBonsai(@PathVariable("owner_id") UUID owner_id, @RequestBody List<UUID> bonsai_ids){
         return ownerService.addBonsais(owner_id, bonsai_ids).stream()
-                .map(DTOMapper::mapLightDTOFromBonsaiOwner)
+                .map(OwnerMapper::mapDTOFromBonsaiOwner)
                 .collect(Collectors.toList());
+    }
+
+    @PostMapping("/{owner_id}/bonsais/{bonsai_id}/transfer")
+    public ResponseEntity<BonsaiOwnerDTO> transfertBonsai(@PathVariable("owner_id") UUID owner_id, @PathVariable("bonsai_id") UUID bonsai_id, @RequestBody OwnerDTO ownerDTO){
+        return ownerService.transfertBonsai(owner_id, bonsai_id, ownerDTO.getId())
+                .map(OwnerMapper::mapDTOFromBonsaiOwner)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 }
