@@ -29,28 +29,28 @@ public class Mapper {
         }
         else
             lastWatering = bonsaiEntity.getListeWaterings().get(0).getDate();
-        Date lastPruning;
-        if (bonsaiEntity.getListePrunings() == null || bonsaiEntity.getListePrunings().isEmpty())
-            lastPruning = null;
-        else
-            lastPruning = bonsaiEntity.getListePrunings().get(0).getDate();
-        Date lastRepotting;
-        if (bonsaiEntity.getListeRepottings() == null || bonsaiEntity.getListeRepottings().isEmpty())
-            lastRepotting = null;
-        else
-            lastRepotting = bonsaiEntity.getListeRepottings().get(0).getDate();
-
+//        Date lastPruning;
+//        if (bonsaiEntity.getListePrunings() == null || bonsaiEntity.getListePrunings().isEmpty())
+//            lastPruning = null;
+//        else
+//            lastPruning = bonsaiEntity.getListePrunings().get(0).getDate();
+//        Date lastRepotting;
+//        if (bonsaiEntity.getListeRepottings() == null || bonsaiEntity.getListeRepottings().isEmpty())
+//            lastRepotting = null;
+//        else
+//            lastRepotting = bonsaiEntity.getListeRepottings().get(0).getDate();
+//
         UUID idOwner;
         if(bonsaiEntity.getOwner() == null){
             idOwner = null;
         }
         else
             idOwner = bonsaiEntity.getOwner().getId_owner();
-        return new BonsaiOwner(bonsaiEntity.getId(),bonsaiEntity.getName(), bonsaiEntity.getSpecies(),bonsaiEntity.getStatus(), bonsaiEntity.getAcquisition_date(), bonsaiEntity.getAcquisition_age(), idOwner, lastWatering, lastPruning, lastRepotting);
+        return new BonsaiOwner(bonsaiEntity.getId(),bonsaiEntity.getName(), bonsaiEntity.getSpecies(),bonsaiEntity.getStatus(), bonsaiEntity.getAcquisition_date(), bonsaiEntity.getAcquisition_age(), idOwner, lastWatering);
     }
 
 
     public static BonsaiOwner mapfromDTO(BonsaiOwnerDTO bonsaiDTO){
-        return new BonsaiOwner(bonsaiDTO.getId(), bonsaiDTO.getName(), bonsaiDTO.getSpecies(), "unknown", null, bonsaiDTO.getAcquisition_age(), null, null, null, null);
+        return new BonsaiOwner(bonsaiDTO.getId(), bonsaiDTO.getName(), bonsaiDTO.getSpecies(), "unknown", null, bonsaiDTO.getAcquisition_age(), null, null/*, null, null*/);
     }
 }

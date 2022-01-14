@@ -18,7 +18,7 @@ public class BonsaiOwner {
     private Date last_repotting;
 
 
-    public BonsaiOwner(UUID id, String name, String species, String status, String acquisition_date, int acquisition_age, UUID id_owner, Date last_watering, Date last_pruning, Date last_repotting) {
+    public BonsaiOwner(UUID id, String name, String species, String status, String acquisition_date, int acquisition_age, UUID id_owner, Date last_watering/*, Date last_pruning, Date last_repotting*/) {
         this.id=id;
         this.name = name;
         this.species = species;
@@ -27,8 +27,8 @@ public class BonsaiOwner {
         this.acquisition_age = acquisition_age;
         this.id_owner = id_owner;
         this.last_watering = last_watering;
-        this.last_pruning= last_pruning;
-        this.last_repotting = last_repotting;
+//        this.last_pruning= last_pruning;
+//        this.last_repotting = last_repotting;
     }
 
     public BonsaiOwner update(BonsaiOwner bonsai){
