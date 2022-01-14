@@ -1,21 +1,15 @@
 package fr.iut.csid.bonsai.exposition;
-
 import fr.iut.csid.bonsai.domain.Service.BonsaiService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-
 import java.net.URI;
 import java.util.List;
 import java.util.UUID;
-import java.util.logging.Logger;
 
-import static fr.iut.csid.bonsai.exposition.BonsaiMapper.bonsaiToDTO;
 
 @RestController
 @RequestMapping("/bonsai")
 public class BonsaiController {
-    Logger log;
     private BonsaiService bonsaiService;
 
     public BonsaiController(BonsaiService bService) {

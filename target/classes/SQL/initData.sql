@@ -20,4 +20,8 @@ alter table repotting add constraint FK_repotting_bonsai FOREIGN KEY(id_bonsai) 
 
 create table owner(id_owner uuid, name varchar, id_bonsai uuid);
 alter table owner add constraint PK_owner primary key(id_owner);
-alter table owner add constraint FK_owner_bonsai foreign key(id_bonsai) references bonsai(id_bonsai)
+alter table owner add constraint FK_owner_bonsai foreign key(id_bonsai) references bonsai(id_bonsai);
+
+
+create table users(id_user uuid, username varchar, enabled boolean, password varchar);
+create table authority(id uuid, authority varchar);
