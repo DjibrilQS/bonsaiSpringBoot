@@ -15,6 +15,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
@@ -62,7 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/swagger-resources/**").permitAll()
                 .antMatchers("/v2/api-docs/**").permitAll()
                 .antMatchers("/login").permitAll()
-                //.anyRequest().authenticated()
+                .anyRequest().authenticated()
                 // Add your endpoints
                 .expressionHandler(webExpressionHandler()).and()
                 .csrf().disable()
@@ -71,6 +72,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers()
                 .frameOptions()
                 .sameOrigin();
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
     }
 
     @Override
