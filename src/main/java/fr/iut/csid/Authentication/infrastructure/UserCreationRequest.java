@@ -4,29 +4,19 @@ import java.util.UUID;
 
 public class UserCreationRequest {
 
-    //private UUID id_user;
-    private String username;
-    private String password;
+    private UserCredentials userCredentials;
 
-    public UserCreationRequest(String username, String password/*, UUID id_user*/){
-        this.username = username;
-        this.password = password;
-       // this.id_user = id_user;
+    public UserCreationRequest(UserCredentials userCredentials){
+       this.userCredentials = userCredentials;
     }
 
     public String getUsername() {
-        return username;
+        return userCredentials.getUsername();
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public String getPassword() {
-        return password;
+        return userCredentials.getPassword();
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

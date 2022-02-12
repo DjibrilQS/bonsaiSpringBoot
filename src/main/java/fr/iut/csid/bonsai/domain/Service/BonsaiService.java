@@ -1,5 +1,6 @@
 package fr.iut.csid.bonsai.domain.Service;
 
+import fr.iut.csid.Authentication.domain.model.AppUser;
 import fr.iut.csid.bonsai.domain.model.Bonsai;
 import fr.iut.csid.bonsai.domain.model.Watering;
 import fr.iut.csid.bonsai.exposition.BonsaiDTO;
@@ -7,6 +8,7 @@ import fr.iut.csid.bonsai.exposition.WateringDTO;
 import fr.iut.csid.bonsai.exposition.WateringMapper;
 import fr.iut.csid.Common.BonsaiEntity;
 import fr.iut.csid.bonsai.infrastructure.BonsaiRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -74,7 +76,24 @@ public class BonsaiService {
         bonsai.setSpecies(bons.getSpecies());
         bonsai.setAcquisition_age(bons.getAcquisition_age());
         bonsai.setAcquisition_date(bons.getAcquisition_date());
-        this.bonsaiRepo.createBonsai(bonsai);
-        return mappingPatch(bonsai);
+        AppUser user = (AppUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (user.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ADMIN") || auth.getAuthority().equals("STAFF")) || bonsai.getId().equals(user.getId())){
+            this.bonsaiRepo.createBonsai(bonsai);
+            return mappingPatch(bonsai);
+        }
+        else {
+            return mappingPatch(bonsai);
+        }
     }
+//    public BonsaiDTO patchBonsai(BonsaiDTO bons, UUID uuid) {
+//        Bonsai bonsai = this.bonsaiRepo.getBonsaiByID(uuid);
+//        bonsai.setName(bons.getName());
+//        bonsai.setSpecies(bons.getSpecies());
+//        bonsai.setAcquisition_age(bons.getAcquisition_age());
+//        bonsai.setAcquisition_date(bons.getAcquisition_date());
+//        AppUser user = (AppUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        this.bonsaiRepo.createBonsai(bonsai);
+//        return mappingPatch(bonsai);
+//    }
 }

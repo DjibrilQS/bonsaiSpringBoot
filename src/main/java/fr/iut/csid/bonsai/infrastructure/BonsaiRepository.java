@@ -1,5 +1,6 @@
 package fr.iut.csid.bonsai.infrastructure;
 
+import fr.iut.csid.Authentication.domain.model.AppUser;
 import fr.iut.csid.Common.BonsaiDao;
 import fr.iut.csid.Common.BonsaiEntity;
 import fr.iut.csid.Common.WateringDao;
@@ -8,6 +9,7 @@ import fr.iut.csid.bonsai.domain.model.Bonsai;
 import fr.iut.csid.bonsai.domain.model.Watering;
 import fr.iut.csid.bonsai.exposition.BonsaiDTO;
 import fr.iut.csid.bonsai.exposition.WateringMapper;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -63,9 +65,22 @@ public class BonsaiRepository {
         return list;
     }
 
-    public void deleteBonsai(UUID uuid) {
-        this.bonsaiDao.deleteById(uuid);
+    public void deleteBonsai(UUID id) {
+        AppUser user = (AppUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (user.getAuthorities().stream().anyMatch(auth -> auth.getAuthority().equals("ADMIN"))){
+            bonsaiDao.deleteById(id);
+        }
+        else{
+            Optional<BonsaiEntity> bonsaiEntity = bonsaiDao.findById(id);
+            if (bonsaiEntity.isPresent() && bonsaiEntity.get().getOwner().getId_owner().equals(user.getId())){
+                bonsaiDao.deleteById(id);
+            }
+        }
     }
+
+//    public void deleteBonsai(UUID uuid) {
+//        this.bonsaiDao.deleteById(uuid);
+//    }
 
     public List<Watering> findAllWaterings(UUID id_bonsai) {
         List<WateringEntity> filterdWateringEntityList = wateringDao.findAllByBonsaiId(id_bonsai);

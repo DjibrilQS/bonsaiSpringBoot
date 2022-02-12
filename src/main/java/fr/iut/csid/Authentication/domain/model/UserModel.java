@@ -1,17 +1,22 @@
-package fr.iut.csid.Authentication.exposition;
+package fr.iut.csid.Authentication.domain.model;
 
 import java.util.UUID;
 
-public class UserDTO {
+public class UserModel {
+
     private UUID id;
     private String username;
     private String password;
+    private String authority;
 
-
-    public UserDTO(UUID id, String username, String password) {
+    public UserModel(UUID id, String username, String password, String authority) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.authority = authority;
+    }
+
+    public UserModel() {
     }
 
     public UUID getId() {
@@ -36,5 +41,13 @@ public class UserDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getAuthority() {
+        return authority;
+    }
+
+    public void setAuthority(String authority) {
+        this.authority = authority;
     }
 }

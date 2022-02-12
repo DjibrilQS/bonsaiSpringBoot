@@ -1,6 +1,8 @@
 package fr.iut.csid.Authentication.domain.service;
 
+import fr.iut.csid.Authentication.Mapper;
 import fr.iut.csid.Authentication.domain.model.AppUser;
+import fr.iut.csid.Authentication.domain.model.UserModel;
 import fr.iut.csid.Authentication.infrastructure.AuthorityEntity;
 import fr.iut.csid.Authentication.infrastructure.AuthorityId;
 import fr.iut.csid.Authentication.infrastructure.UserCreationRequest;
@@ -8,6 +10,7 @@ import fr.iut.csid.Authentication.infrastructure.UserCredentials;
 import fr.iut.csid.Common.UserDao;
 import fr.iut.csid.Common.UserEntity;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,8 +19,10 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -58,7 +63,12 @@ public class UserService implements UserDetailsService {
         userDao.save(user);
     }
 
-    public List<UserEntity> getAllUsers() {
-        return this.userDao.findAll();
+    public List<UserModel> getAllUsers() {
+        return userDao.findAll().stream().map(Mapper::mapFromEntity).collect(Collectors.toList());
+    }
+
+    public Optional<UserModel> getMe() {
+        AppUser credentials = (AppUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return userDao.findById(credentials.getId()).map(Mapper::mapFromEntity);
     }
 }

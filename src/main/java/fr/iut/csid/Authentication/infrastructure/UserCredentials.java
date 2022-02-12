@@ -3,7 +3,6 @@ package fr.iut.csid.Authentication.infrastructure;
 public class UserCredentials {
 
     private String username;
-
     private String password;
 
     public UserCredentials(String username, String password) {

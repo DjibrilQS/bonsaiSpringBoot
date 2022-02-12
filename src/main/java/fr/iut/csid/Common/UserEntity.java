@@ -7,15 +7,15 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "users")
+@Table(name = "owner")
 public class UserEntity {
 
     @Id
     @GeneratedValue
-    @Column(name = "id_user")
+    @Column(name = "id_owner")
     private UUID id_user;
 
-    @Column(name = "username", unique = true)
+    @Column(name = "name", unique = true)
     private String username;
 
     @Column(name = "password")

@@ -66,8 +66,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 // Add your endpoints
                 .expressionHandler(webExpressionHandler()).and()
-                .csrf().disable()
-                .addFilter(new JsonAuthenticationFilter(authenticationManager(), new ObjectMapper()));
+                .csrf().disable();
+                //.addFilter(new JsonAuthenticationFilter(authenticationManager(), new ObjectMapper()));
 
         http.headers()
                 .frameOptions()
